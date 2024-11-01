@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Two way Binding function.
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <>
       <div className="flex items-center justify-center h-screen w-screen">
         <div className="border-4 rounded-xl border-emerald-600 p-20 ">
-          <form className="flex flex-col ">
+          <form
+            onSubmit={(e) => {
+              submitHandler(e);
+            }}
+            className="flex flex-col "
+          >
             <input
-              className=" placeholder:text-white bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className=" placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4"
+              required
               type="email"
               placeholder="Enter your Email"
             />
             <input
-              className=" placeholder:text-white bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              className=" placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4"
+              required
               type="password"
               placeholder="Enter Password"
             />

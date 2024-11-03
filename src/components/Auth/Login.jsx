@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // Two way Binding function.
   const submitHandler = (e) => {
     e.preventDefault();
+    handleLogin(email, password);
     setEmail("");
     setPassword("");
   };

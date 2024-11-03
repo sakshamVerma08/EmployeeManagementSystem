@@ -22,3 +22,7 @@ body {
 #tasklist::-webkit-scrollbar {
   display: none;
 }
+
+#Alltasks::-webkit-scrollbar {
+  display: none;
+}

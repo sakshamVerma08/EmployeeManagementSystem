@@ -1,7 +1,7 @@
 const employees = [
   {
     id: 1,
-    email: "tarunsindhwani122@gmail.com",
+    email: "employee1@example.com",
     password: "1234",
     tasks: [
       {
@@ -196,11 +196,13 @@ const admin = [
   },
 ];
 
+// Method below stores the data in arrays in the localStorage inn a readable format
 export const setLocalStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
   localStorage.setItem("admin", JSON.stringify(admin));
 };
 
+// Method below is responsible to return the data stored in Local Storage.
 export const getLocalStorage = () => {
   const employeeData = JSON.parse(localStorage.getItem("employees"));
   const adminData = JSON.parse(localStorage.getItem("admin"));

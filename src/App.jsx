@@ -8,18 +8,38 @@ const App = () => {
   const [user, setUser] = useState(null);
   const authData = getLocalStorage(AuthContext);
 
+  // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
+  useEffect(() => {
+    setLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    if (authData) {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) setUser(loggedInUser.role);
+    }
+  }, [authData]);
+
   const handleLogin = (email, password) => {
-    if (email === "admin123@gmail.com" && password === "1234") {
-      console.log("admin");
+    if (email === "saksham456@gmail.com" && password === "ff") {
       setUser("admin");
+      localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
     } else if (
       authData &&
-      authData.employeeData.find(
-        (e) => email === e.email && password === e.password
-      )
+      authData.employeeData.find((elem) => {
+        if (email === elem.email && password === elem.password) {
+          return true;
+        } else {
+          return false;
+        }
+      })
     ) {
       console.log("User Login successful");
       setUser("employee");
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({ role: "employee" })
+      );
     } else {
       alert("Invalid Credentials");
     }

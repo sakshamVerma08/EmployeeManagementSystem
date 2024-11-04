@@ -1,49 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
-import Alert from "./components/others/Alert";
-import ErrorAlert from "./components/others/ErrorAlert";
+import { AuthContext } from "./context/AuthProvider";
 const App = () => {
   const [user, setUser] = useState(null);
-  const [alertMessage, setAlertMessage] = useState("");
-  const [messageType, setMessageType] = useState("");
+  const authData = getLocalStorage(AuthContext);
 
   const handleLogin = (email, password) => {
     if (email === "admin123@gmail.com" && password === "1234") {
-      setMessageType("success");
-      setAlertMessage("Admin Login successful!");
-      console.log(msg);
-    } else if (email === "userxyz@gmail.com" && password === "2769") {
+      console.log("admin");
+      setUser("admin");
+    } else if (
+      authData &&
+      authData.employeeData.find(
+        (e) => email === e.email && password === e.password
+      )
+    ) {
       console.log("User Login successful");
       setUser("employee");
-      setAlertMessage("User Login Successful!");
-      setMessageType("success");
     } else {
-      setAlertMessage("Invalid Credentials. Try Again!");
-      setMessageType("error");
+      alert("Invalid Credentials");
     }
-
-    setTimeout(() => {
-      setMessageType("");
-    }, 3000);
   };
-
-  // useEffect(() => {
-  //   getLocalStorage();
-  // });
 
   return (
     <>
-      {alertMessage && messageType === "success" && (
-        <Alert msg={alertMessage} />
-      )}
-      {alertMessage && messageType === "error" && (
-        <ErrorAlert msg={alertMessage} />
-      )}
-      <Login />
-      {user === "admin" ? <AdminDashboard /> : <EmployeeDashboard />}
+      {!user ? <Login handleLogin={handleLogin} /> : ""}
+      {user === "admin" ? <AdminDashboard /> : ""}
+      {user === "employee" ? <EmployeeDashboard /> : ""}
     </>
   );
 };

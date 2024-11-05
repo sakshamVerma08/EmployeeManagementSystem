@@ -8,43 +8,45 @@ const App = () => {
   const [user, setUser] = useState(null);
   const authData = getLocalStorage(AuthContext);
 
-  // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
+  // This 'loggedInUser' state is used to store the state of data of the currently logged in User.
+  const [loggedInUser, setloggedInUser] = useState(null);
+
   useEffect(() => {
+    // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
+
     setLocalStorage();
   }, []);
 
+  /*
   useEffect(() => {
     if (authData) {
       let loggedInUser = localStorage.getItem("loggedInUser");
       if (loggedInUser) {
         let parsedUser = JSON.parse(loggedInUser);
         setUser(parsedUser.role);
-        console.log(parsedUser.role);
       }
     }
   }, [authData]);
 
+  */
   const handleLogin = (email, password) => {
     if (email === "admin@o.com" && password === "admin") {
       setUser("admin");
-      console.log("admin Login");
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
-    } else if (
-      authData &&
-      authData.employeeData.find((elem) => {
-        if (email === elem.email && password === elem.password) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-    ) {
-      console.log("User Login successful");
-      setUser("employee");
-      localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify({ role: "employee" })
-      );
+    } else if (authData) {
+      const employee = authData.employeeData.find((e) => {
+        if (email === e.email && password === e.password) return true;
+        else return false;
+      });
+
+      if (employee) {
+        setUser("employee");
+        setloggedInUser(employee);
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({ role: "employee" })
+        );
+      }
     } else {
       alert("Invalid Credentials");
     }
@@ -56,9 +58,9 @@ const App = () => {
         <Login handleLogin={handleLogin} />
       ) : user === "admin" ? (
         <AdminDashboard />
-      ) : (
-        <EmployeeDashboard />
-      )}
+      ) : user == "employee" ? (
+        <EmployeeDashboard data={loggedInUser} />
+      ) : null}
     </>
   );
 };

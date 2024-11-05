@@ -190,8 +190,8 @@ const admin = [
   {
     admin: {
       id: 1,
-      email: "admin@example.com",
-      password: "1234",
+      email: "saksham456@gmail.com",
+      password: "fff",
     },
   },
 ];

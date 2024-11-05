@@ -24,6 +24,7 @@ const Login = ({ handleLogin }) => {
           >
             <input
               value={email}
+              autoComplete="on"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -34,6 +35,7 @@ const Login = ({ handleLogin }) => {
             />
             <input
               value={password}
+              autoComplete="on"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}

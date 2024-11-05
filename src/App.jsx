@@ -15,14 +15,19 @@ const App = () => {
 
   useEffect(() => {
     if (authData) {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      if (loggedInUser) setUser(loggedInUser.role);
+      let loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        let parsedUser = JSON.parse(loggedInUser);
+        setUser(parsedUser.role);
+        console.log(parsedUser.role);
+      }
     }
   }, [authData]);
 
   const handleLogin = (email, password) => {
-    if (email === "saksham456@gmail.com" && password === "ff") {
+    if (email === "admin@o.com" && password === "admin") {
       setUser("admin");
+      console.log("admin Login");
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
     } else if (
       authData &&
@@ -47,9 +52,13 @@ const App = () => {
 
   return (
     <>
-      {!user ? <Login handleLogin={handleLogin} /> : ""}
-      {user === "admin" ? <AdminDashboard /> : ""}
-      {user === "employee" ? <EmployeeDashboard /> : ""}
+      {!user ? (
+        <Login handleLogin={handleLogin} />
+      ) : user === "admin" ? (
+        <AdminDashboard />
+      ) : (
+        <EmployeeDashboard />
+      )}
     </>
   );
 };

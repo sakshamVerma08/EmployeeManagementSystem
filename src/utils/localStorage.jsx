@@ -2,7 +2,7 @@ const employees = [
   {
     id: 1,
     name: "Amit",
-    email: "amitvirmani1972@gmail.com",
+    email: "e@e.com",
     password: "1234",
     taskCounts: {
       active: 2,
@@ -24,6 +24,7 @@ const employees = [
       },
       {
         taskNumber: 2,
+
         title: "Set up workstation",
         description: "Arrange and personalize your workstation.",
         date: "2024-11-04",
@@ -34,7 +35,8 @@ const employees = [
         failed: false,
       },
       {
-        taskNumber: 3,
+        taskNumber: 2,
+
         title: "Introduction to team",
         description: "Meet the team and get an overview of ongoing projects.",
         date: "2024-11-05",
@@ -60,6 +62,7 @@ const employees = [
     tasks: [
       {
         taskNumber: 1,
+
         title: "Code review",
         description: "Review PRs from the frontend team.",
         date: "2024-11-03",
@@ -71,6 +74,7 @@ const employees = [
       },
       {
         taskNumber: 2,
+
         title: "Write unit tests",
         description: "Cover recent features with tests.",
         date: "2024-11-05",
@@ -82,6 +86,7 @@ const employees = [
       },
       {
         taskNumber: 3,
+
         title: "Prepare presentation",
         description: "Prepare slides for the upcoming sprint review.",
         date: "2024-11-10",
@@ -107,6 +112,7 @@ const employees = [
     tasks: [
       {
         taskNumber: 1,
+
         title: "Update database schema",
         description: "Add new fields to the user table.",
         date: "2024-11-03",
@@ -118,6 +124,7 @@ const employees = [
       },
       {
         taskNumber: 2,
+
         title: "Optimize queries",
         description: "Improve performance of SQL queries.",
         date: "2024-11-04",
@@ -129,6 +136,7 @@ const employees = [
       },
       {
         taskNumber: 3,
+
         title: "Database backup",
         description: "Schedule weekly backup for production.",
         date: "2024-11-07",
@@ -235,11 +243,11 @@ const employees = [
     ],
   },
 ];
-
 const admin = [
   {
     id: 1,
-    email: "sakshamv456@gmail.com",
+    name: "Saksham",
+    email: "admin12@gmail.com",
     password: "admin",
   },
 ];

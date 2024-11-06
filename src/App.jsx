@@ -4,12 +4,13 @@ import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
 import { AuthContext } from "./context/AuthProvider";
+import { parse } from "postcss";
 const App = () => {
   const [user, setUser] = useState(null);
   const authData = getLocalStorage(AuthContext);
 
-  // This 'loggedInUser' state is used to store the state of data of the currently logged in User.
-  const [loggedInUser, setloggedInUser] = useState(null);
+  // This 'loggedInUserData' state is used to store the state of data of the currently logged in User.
+  const [loggedInUserData, setloggedInUserData] = useState(null);
 
   useEffect(() => {
     // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
@@ -17,22 +18,34 @@ const App = () => {
     setLocalStorage();
   }, []);
 
-  /*
   useEffect(() => {
     if (authData) {
       let loggedInUser = localStorage.getItem("loggedInUser");
       if (loggedInUser) {
-        let parsedUser = JSON.parse(loggedInUser);
-        setUser(parsedUser.role);
+        let parsedData = JSON.parse(loggedInUser);
+        setUser(parsedData.role);
+        setloggedInUserData(parsedData.data);
       }
     }
-  }, [authData]);
+  }, []);
 
-  */
   const handleLogin = (email, password) => {
-    if (email === "admin@o.com" && password === "admin") {
+    if (email === "admin12@gmail.com" && password === "admin") {
       setUser("admin");
-      localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
+      // Setting loggedInUserData to adminData
+      // We use .find() in adminData so we can scan the data of specific admin that has signed in, in case of multiple admins.
+      const admin = authData.adminData.find((e) => {
+        if (email === e.email && password === e.password) return true;
+        else return false;
+      });
+      if (admin) {
+        setloggedInUserData(admin);
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({ role: "admin", data: admin })
+        );
+      }
+      // *************************
     } else if (authData) {
       const employee = authData.employeeData.find((e) => {
         if (email === e.email && password === e.password) return true;
@@ -41,10 +54,10 @@ const App = () => {
 
       if (employee) {
         setUser("employee");
-        setloggedInUser(employee);
+        setloggedInUserData(employee);
         localStorage.setItem(
           "loggedInUser",
-          JSON.stringify({ role: "employee" })
+          JSON.stringify({ role: "employee", data: employee })
         );
       }
     } else {
@@ -57,9 +70,9 @@ const App = () => {
       {!user ? (
         <Login handleLogin={handleLogin} />
       ) : user === "admin" ? (
-        <AdminDashboard />
+        <AdminDashboard data={loggedInUserData} />
       ) : user == "employee" ? (
-        <EmployeeDashboard data={loggedInUser} />
+        <EmployeeDashboard data={loggedInUserData} />
       ) : null}
     </>
   );

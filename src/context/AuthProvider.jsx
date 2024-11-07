@@ -11,13 +11,15 @@ const AuthProvider = ({ children }) => {
   // by using the "getLocalStorage" method defined in the localStorage.jsx .
   useEffect(() => {
     // We seperately store the employeeData and adminData, that was incoming from the Local Storage.
-    const { employeeData, adminData } = getLocalStorage();
-    setUserData({ employeeData, adminData });
+    const { employeeData } = getLocalStorage();
+    setUserData(employeeData);
   }, []);
 
   return (
     <div>
-      <AuthContext.Provider value={userData}>{children}</AuthContext.Provider>
+      <AuthContext.Provider value={[userData, setUserData]}>
+        {children}
+      </AuthContext.Provider>
     </div>
   );
 };

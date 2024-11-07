@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const CreateTask = () => {
+  const [userData, setUserData] = useContext(AuthContext);
   // Initializing stateHooks for each input field value
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -8,6 +10,7 @@ const CreateTask = () => {
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [newTask, setNewTask] = useState({});
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -23,14 +26,17 @@ const CreateTask = () => {
       failed: false,
     });
 
-    const data = JSON.parse(localStorage.getItem("employees"));
+    const data = userData;
 
     data.forEach((e) => {
       if (newTask.assignTo === e.name) {
         e.tasks.push(newTask);
-        console.log(e.tasks);
+        e.taskCounts.newTask = e.taskCounts.newTask + 1;
       }
     });
+
+    setUserData(data);
+    console.log(data);
 
     setTitle("");
     setCategory("");

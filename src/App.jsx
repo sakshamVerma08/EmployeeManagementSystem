@@ -7,7 +7,8 @@ import { AuthContext } from "./context/AuthProvider";
 import { parse } from "postcss";
 const App = () => {
   const [user, setUser] = useState(null);
-  const authData = getLocalStorage(AuthContext);
+  const [userData, setUserData, adminData, setAdminData] =
+    useContext(AuthContext);
 
   // This 'loggedInUserData' state is used to store the state of data of the currently logged in User.
   const [loggedInUserData, setloggedInUserData] = useState(null);
@@ -19,7 +20,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (authData) {
+    if (userData) {
       let loggedInUser = localStorage.getItem("loggedInUser");
       if (loggedInUser) {
         let parsedData = JSON.parse(loggedInUser);
@@ -34,7 +35,7 @@ const App = () => {
       setUser("admin");
       // Setting loggedInUserData to adminData
       // We use .find() in adminData so we can scan the data of specific admin that has signed in, in case of multiple admins.
-      const admin = authData.adminData.find((e) => {
+      const admin = adminData.find((e) => {
         if (email === e.email && password === e.password) return true;
         else return false;
       });
@@ -46,8 +47,8 @@ const App = () => {
         );
       }
       // *************************
-    } else if (authData) {
-      const employee = authData.employeeData.find((e) => {
+    } else if (userData) {
+      const employee = userData.find((e) => {
         if (email === e.email && password === e.password) return true;
         else return false;
       });

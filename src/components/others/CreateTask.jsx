@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { setLocalStorage } from "../../utils/localStorage";
 
 const CreateTask = () => {
   const [userData, setUserData] = useContext(AuthContext);
@@ -9,12 +10,11 @@ const CreateTask = () => {
   const [empName, setEmpName] = useState("");
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
-  const [newTask, setNewTask] = useState({});
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    setNewTask({
+    const newTask = {
       title: title,
       description: desc,
       date: date,
@@ -24,19 +24,21 @@ const CreateTask = () => {
       newTask: true,
       completed: false,
       failed: false,
-    });
+    };
+    console.log(newTask);
 
     const data = userData;
 
     data.forEach((e) => {
       if (newTask.assignTo === e.name) {
         e.tasks.push(newTask);
-        e.taskCounts.newTask = e.taskCounts.newTask + 1;
+        e.taskCounts.newTask += 1;
+        console.log(`Task Count of ${e.name} = `, e.taskCounts.newTask);
       }
     });
 
     setUserData(data);
-    console.log(data);
+    
 
     setTitle("");
     setCategory("");

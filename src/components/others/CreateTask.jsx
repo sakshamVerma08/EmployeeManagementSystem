@@ -7,14 +7,38 @@ const CreateTask = () => {
   const [empName, setEmpName] = useState("");
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
+  const [newTask, setNewTask] = useState({});
   const submitHandler = (e) => {
     e.preventDefault();
+
+    setNewTask({
+      title: title,
+      description: desc,
+      date: date,
+      category: category,
+      assignTo: empName,
+      active: false,
+      newTask: true,
+      completed: false,
+      failed: false,
+    });
+
+    const data = JSON.parse(localStorage.getItem("employees"));
+
+    data.forEach((e) => {
+      if (newTask.assignTo === e.name) {
+        e.tasks.push(newTask);
+        console.log(e.tasks);
+      }
+    });
+
     setTitle("");
-    setDate("");
     setCategory("");
-    setDesc("");
+    setDate("");
     setEmpName("");
+    setDesc("");
   };
+
   return (
     <div className="mt-7 p-5 bg-[#1c1c1c]">
       <form

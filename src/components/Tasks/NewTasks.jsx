@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const NewTasks = ({ data, employeeData }) => {
   const [newTaskStatus, setnewTaskStatus] = useState(true);
@@ -12,17 +12,23 @@ const NewTasks = ({ data, employeeData }) => {
     const taskIndex = employeeData.tasks.findIndex((elem) => {
       return elem.newTask === true;
     });
-    console.log("i=", taskIndex);
-    console.log("empData", employeeData);
-    console.log("data = ", data);
+
     if (taskIndex !== -1) {
       const currentTask = employeeData.tasks[taskIndex];
-      console.log(currentTask);
       currentTask.active = true;
       currentTask.newTask = false;
-      setnewTaskStatus(false);
+      localStorage.setItem("taskStatus", "accepted");
     }
   };
+
+  useEffect(() => {
+    const storedTaskStatus = localStorage.getItem("taskStatus");
+    console.log(storedTaskStatus);
+    if (storedTaskStatus === "accepted") {
+      setnewTaskStatus(false);
+    }
+  }, [data.title]);
+
   return (
     <div className=" flex-shrink-0 bg-indigo-600 w-[400px] py-5 px-3 h-full rounded-xl">
       <div className="flex justify-between items-center">

@@ -1,5 +1,4 @@
 const employees = [
-
   {
     id: 1,
     name: "Amit",
@@ -20,7 +19,7 @@ const employees = [
         category: "HR",
         active: true,
         completed: false,
-        newTask: true,
+        newTask: false,
         failed: false,
       },
       {
@@ -32,7 +31,7 @@ const employees = [
         category: "Setup",
         active: true,
         completed: false,
-        newTask: true,
+        newTask: false,
         failed: false,
       },
       {

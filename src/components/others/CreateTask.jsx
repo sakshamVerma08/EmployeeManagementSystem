@@ -25,7 +25,6 @@ const CreateTask = () => {
       completed: false,
       failed: false,
     };
-    console.log(newTask);
 
     const data = userData;
 
@@ -33,12 +32,9 @@ const CreateTask = () => {
       if (newTask.assignTo === e.name) {
         e.tasks.push(newTask);
         e.taskCounts.newTask += 1;
-        console.log(`Task Count of ${e.name} = `, e.taskCounts.newTask);
       }
     });
-
     setUserData(data);
-    
 
     setTitle("");
     setCategory("");

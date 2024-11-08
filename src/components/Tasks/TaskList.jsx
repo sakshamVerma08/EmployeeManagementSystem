@@ -15,7 +15,7 @@ const TaskList = ({ data }) => {
           return <AcceptTasks key={index} data={element} />;
         }
         if (element.newTask) {
-          return <NewTasks key={index} data={element} />;
+          return <NewTasks key={index} data={element} employeeData={data} />;
         }
 
         if (element.completed) {

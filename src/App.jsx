@@ -15,36 +15,34 @@ const App = () => {
 
   useEffect(() => {
     // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
-
     setLocalStorage();
   }, []);
 
   useEffect(() => {
-    if (userData) {
-      let loggedInUser = localStorage.getItem("loggedInUser");
-      if (loggedInUser) {
-        let parsedData = JSON.parse(loggedInUser);
-        setUser(parsedData.role);
-        setloggedInUserData(parsedData.data);
-      }
+    const newUser = localStorage.getItem("loggedInUser");
+    if (newUser) {
+      const parsedUser = JSON.parse(newUser);
+      setUser(parsedUser.role);
+      setloggedInUserData(parsedUser.data);
     }
-  }, []);
+  }, [userData]);
+
 
   const handleLogin = (email, password) => {
-    if (email === "admin12@gmail.com" && password === "admin") {
+    if (email === "saksham8@gmail.com" && password === "sak") {
+      // setting 'user' state to admin, coz admin is currently logged in.
       setUser("admin");
       // Setting loggedInUserData to adminData
       // We use .find() in adminData so we can scan the data of specific admin that has signed in, in case of multiple admins.
-      const admin = adminData.find((e) => {
-        if (email === e.email && password === e.password) return true;
-        else return false;
-      });
+      const admin = adminData[0];
+
       if (admin) {
         setloggedInUserData(admin);
         localStorage.setItem(
           "loggedInUser",
           JSON.stringify({ role: "admin", data: admin })
         );
+        
       }
       // *************************
     } else if (userData) {

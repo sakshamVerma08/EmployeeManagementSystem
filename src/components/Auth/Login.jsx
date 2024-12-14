@@ -14,8 +14,22 @@ const Login = ({ handleLogin }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen w-screen">
-        <div className="border-4 rounded-xl border-emerald-600 p-20 ">
+      <div className=" flex items-center justify-between h-screen ">
+        {/* DIV 1*/}
+        <div id="login-div1">
+          <div id="gola1">{/* contains the image */}</div>
+
+          <h1 id="titleText">
+            <span>
+              WELCOME TO <br />
+              EMPLOYEE MANAGEMENT
+              <br /> SITE
+            </span>
+          </h1>
+        </div>
+
+        {/* DIV 2*/}
+        <div className=" responsive-login border-3 rounded-xl border-emerald-600 p-20 ">
           <form
             onSubmit={(e) => {
               submitHandler(e);
@@ -28,7 +42,7 @@ const Login = ({ handleLogin }) => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              className=" placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 w-79"
+              className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 w-79"
               required
               type="email"
               placeholder="Enter your Email"
@@ -39,7 +53,7 @@ const Login = ({ handleLogin }) => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              className=" placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4  w-79"
+              className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4  w-79"
               required
               type="password"
               placeholder="Enter Password"

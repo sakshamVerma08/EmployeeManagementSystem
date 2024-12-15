@@ -31,19 +31,28 @@ body {
   background-color: blue;
 }
 
+#login-div1{
+  background-color: grey;
+  
+}
+
 #gola1 {
-  background-color: #d4d4d4;
+  background-color: #e16c18;
   position: relative;
   height: 45vh;
   width: 45vh;
   border-radius: 50%;
-  filter: blur(5px);
-  transition: 0.3s all ease-in-out;
-  animation-name: gola1Anim;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
+  filter: blur(17px);
+  /* opacity:0; */
 }
 
+#gola2 {
+  background-color: #e16c18;
+  position: relative;
+  height: 45vh;
+  width: 45vh;
+  border-radius: 25%;
+}
 #titleText {
   font-size: 50px;
   color: #867d7d;
@@ -53,18 +62,6 @@ body {
 
 .title-container {
   font-size: 50px;
-}
-
-/***************** ANIMATIONS ***************/
-
-@keyframes gola1Anim {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(75);
-  }
 }
 
 /************* MEDIA QUERIES ****************/

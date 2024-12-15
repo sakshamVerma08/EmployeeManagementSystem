@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, transform } from "motion/react";
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,19 @@ const Login = ({ handleLogin }) => {
       <div className=" flex items-center justify-between h-screen ">
         {/* DIV 1*/}
         <div id="login-div1">
-          <div id="gola1">{/* contains the image */}</div>
+          <motion.div
+            id="gola1"
+            animate={{
+              x: [0, 150, 0],
+              y: [0, -250, 0],
+              skewX: -20,
+            }}
+            transition={{
+              duration: 3,
+              delay: 1,
+              ease: "easeInOut",
+            }}
+          ></motion.div>
 
           <h1 id="titleText">
             <span>
@@ -26,6 +39,8 @@ const Login = ({ handleLogin }) => {
               <br /> SITE
             </span>
           </h1>
+
+          <motion.div id="gola2"></motion.div>
         </div>
 
         {/* DIV 2*/}

@@ -5,6 +5,7 @@ import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
 import { AuthContext } from "./context/AuthProvider";
 import { parse } from "postcss";
+import { motion } from "motion/react";
 const App = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData, adminData, setAdminData] =
@@ -27,7 +28,6 @@ const App = () => {
     }
   }, [userData]);
 
-
   const handleLogin = (email, password) => {
     if (email === "saksham8@gmail.com" && password === "sak") {
       // setting 'user' state to admin, coz admin is currently logged in.
@@ -42,7 +42,6 @@ const App = () => {
           "loggedInUser",
           JSON.stringify({ role: "admin", data: admin })
         );
-        
       }
       // *************************
     } else if (userData) {

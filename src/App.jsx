@@ -6,6 +6,7 @@ import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
 import { AuthContext } from "./context/AuthProvider";
 import { parse } from "postcss";
 import { motion } from "motion/react";
+import Alert from "./components/others/Alert";
 const App = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData, adminData, setAdminData] =
@@ -13,6 +14,20 @@ const App = () => {
 
   // This 'loggedInUserData' state is used to store the state of data of the currently logged in User.
   const [loggedInUserData, setloggedInUserData] = useState(null);
+
+  // Alert component states. For type of alert, message displayed inside alert, visibility of alert component.
+  const [alertType, setAlertType] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
+
+  // This function toggles the visibility of alert.
+  const showAlert = () => {
+    setAlertVisible(!alertVisible);
+
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 2000);
+  };
 
   useEffect(() => {
     // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
@@ -62,13 +77,25 @@ const App = () => {
       alert("Invalid Credentials");
     }
   };
+  // ************************************
+  // ***********************************
 
+  /*  COMPONENT BEGINS    */
   return (
     <>
+      {alertVisible ? <Alert msg={alertMessage} type={alertType} /> : ""}
       {!user ? (
         <Login handleLogin={handleLogin} />
       ) : user === "admin" ? (
-        <AdminDashboard changeUser={setUser} data={loggedInUserData} />
+        <AdminDashboard
+          alertMessage={alertMessage}
+          showAlert={showAlert}
+          setAlertMessage={setAlertMessage}
+          alertType={alertType}
+          setAlertType={setAlertType}
+          changeUser={setUser}
+          data={loggedInUserData}
+        />
       ) : user == "employee" ? (
         <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
       ) : null}

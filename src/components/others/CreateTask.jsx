@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { setLocalStorage } from "../../utils/localStorage";
 
-const CreateTask = () => {
+const CreateTask = (props) => {
   const [userData, setUserData] = useContext(AuthContext);
   // Initializing stateHooks for each input field value
   const [title, setTitle] = useState("");
@@ -10,6 +10,12 @@ const CreateTask = () => {
   const [empName, setEmpName] = useState("");
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
+
+  const handleTaskCreation = () => {
+    props.showAlert();
+    props.setAlertMessage("The task was created !");
+    props.setAlertType("success");
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -117,7 +123,10 @@ const CreateTask = () => {
           ></textarea>
         </div>
 
-        <button className="bg-emerald-500 py-3 hover:bg-emerald-600 rounded text-sm mt-4 w-full">
+        <button
+          onClick={handleTaskCreation}
+          className="bg-emerald-500 py-3 hover:bg-emerald-600 rounded text-sm mt-4 w-full"
+        >
           Create Task
         </button>
       </form>

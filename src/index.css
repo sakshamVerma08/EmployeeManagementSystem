@@ -21,9 +21,8 @@ body {
 }
 
 #menu {
-  display: flex;
-  background-color: red;
-  height: 10vh;
+  display: none;
+  height: 50px;
   width: 50px;
   cursor: pointer;
 }
@@ -41,7 +40,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  background-color: #ffffff44;
+  background-color: #ffffff00;
   backdrop-filter: blur(10px);
   height: 100vh;
   width: 300px;
@@ -54,6 +53,7 @@ body {
 
 .sidebar li {
   width: 100%;
+  margin: 15px 25px;
 }
 
 #responsiveNav nav ul {
@@ -110,6 +110,8 @@ body {
   height: 95vh;
 }
 
+
+
 /************* MEDIA QUERIES ****************/
 @media (max-width: 425px) {
   .login-div2 {
@@ -120,14 +122,19 @@ body {
     padding: 3;
   }
 
+  .sidebar {
+    width: 100%;
+  }
+
   .responsive-btn {
     opacity: 0;
   }
 
   #menu {
-    display: flex;
+    display: block;
   }
 }
+
 @media (max-width: 341px) {
   .responsive-input {
     padding: 10px 12px;

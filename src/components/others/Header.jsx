@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { IoMdMenu } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import Alert from "./Alert";
 
 const Header = ({ data, changeUser }) => {
-  const [visibleMenu, setVisibleMenu] = useState(true);
+  const [visibleMenu, setVisibleMenu] = useState(false);
+  const [iconSize, setIconSize] = useState(window.innerWidth > 320 ? 50 : 20);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIconSize(window.innerWidth > 320 ? 50 : 20);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLogout = () => {
     localStorage.setItem("loggedInUser", "");
@@ -14,8 +24,11 @@ const Header = ({ data, changeUser }) => {
   const toggleSidebar = () => {
     setVisibleMenu(!visibleMenu);
   };
+
+  //*************************** */
+  /* COMPONENT BEGINS */
   return (
-    <div className="flex items-end justify-between">
+    <div className=" flex items-end justify-between">
       <h1 className="text-2xl font-medium">
         Hello <br />{" "}
         <span className="font-3xl font-semibold">{data.name} 👋🏻</span>
@@ -38,13 +51,6 @@ const Header = ({ data, changeUser }) => {
                   Log out
                 </motion.button>
               </li>
-
-              <li>
-                <button className="text-black">Heya Buddy</button>
-              </li>
-              <li>
-                <button className="text-black">Heya Buddy 2</button>
-              </li>
             </ul>
           </nav>
         </>
@@ -59,7 +65,7 @@ const Header = ({ data, changeUser }) => {
         </motion.button>
       )}
 
-      <IoMdMenu id="menu" onClick={toggleSidebar} />
+      <IoMdMenu id="menu" size={iconSize} onClick={toggleSidebar} />
     </div>
   );
 };

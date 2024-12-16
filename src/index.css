@@ -14,10 +14,18 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   background-color: #0e0e0e;
   width: 100%;
   position: relative;
+}
+
+#menu {
+  display: flex;
+  background-color: red;
+  height: 10vh;
+  width: 50px;
+  cursor: pointer;
 }
 
 #tasklist::-webkit-scrollbar {
@@ -26,6 +34,34 @@ body {
 
 #AllTasks::-webkit-scrollbar {
   display: none;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #ffffff44;
+  backdrop-filter: blur(10px);
+  height: 100vh;
+  width: 300px;
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  right: 0;
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar li {
+  width: 100%;
+}
+
+#responsiveNav nav ul {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .responsive-input {
@@ -75,25 +111,27 @@ body {
 }
 
 /************* MEDIA QUERIES ****************/
-
-@media (max-width: 341px) {
-  .responsive-input {
-    padding: 10px 12px;
-    font-size: 14px;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 700px) {
-  .responsive-input {
-  }
-}
-@media (max-width: 420px) {
+@media (max-width: 425px) {
   .login-div2 {
     margin: 0;
     width: 100%;
     border-radius: 0%;
     max-width: 100%;
     padding: 3;
+  }
+
+  .responsive-btn {
+    opacity: 0;
+  }
+
+  #menu {
+    display: flex;
+  }
+}
+@media (max-width: 341px) {
+  .responsive-input {
+    padding: 10px 12px;
+    font-size: 14px;
+    max-width: 100%;
   }
 }

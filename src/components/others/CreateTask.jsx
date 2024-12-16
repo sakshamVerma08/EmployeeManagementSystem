@@ -11,35 +11,43 @@ const CreateTask = (props) => {
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
 
-  const handleTaskCreation = () => {
-    props.showAlert();
-    props.setAlertMessage("The task was created !");
-    props.setAlertType("success");
+
+  const generateTaskId = (empName, taskNumber) => {
+    const formattedName = empName.toLowerCase().replace(/\s+/g, "");
+    return `task${taskNumber}-${formattedName}`;
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    props.showAlert();
+    props.setAlertMessage("The task was created !");
+    props.setAlertType("success");
 
-    const newTask = {
-      title: title,
-      description: desc,
-      date: date,
-      category: category,
-      assignTo: empName,
-      active: false,
-      newTask: true,
-      completed: false,
-      failed: false,
-    };
+    const data = [...userData];
 
-    const data = userData;
+    data.forEach((employee) => {
+      if (employee.name == empName) {
+        const taskNumber = employee.tasks.length + 1;
+        const taskId = generateTaskId(employee.name, taskNumber);
 
-    data.forEach((e) => {
-      if (newTask.assignTo === e.name) {
-        e.tasks.push(newTask);
-        e.taskCounts.newTask += 1;
+        const newTask = {
+          id: taskId,
+          title: title,
+          description: desc,
+          date: date,
+          category: category,
+          assignTo: empName,
+          active: false,
+          newTask: true,
+          completed: false,
+          failed: false,
+        };
+
+        employee.tasks.push(newTask);
+        employee.taskCounts.newTask += 1;
       }
     });
+
     setUserData(data);
 
     setTitle("");
@@ -123,10 +131,7 @@ const CreateTask = (props) => {
           ></textarea>
         </div>
 
-        <button
-          onClick={handleTaskCreation}
-          className="bg-emerald-500 py-3 hover:bg-emerald-600 rounded text-sm mt-4 w-full"
-        >
+        <button className="bg-emerald-500 py-3 hover:bg-emerald-600 rounded text-sm mt-4 w-full">
           Create Task
         </button>
       </form>

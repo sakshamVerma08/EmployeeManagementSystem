@@ -1,5 +1,5 @@
 import React from "react";
-import AcceptTasks from "./AcceptTasks";
+import ActiveTasks from "./ActiveTasks";
 import NewTasks from "./NewTasks";
 import CompleteTasks from "./CompleteTasks";
 import FailedTasks from "./FailedTasks";
@@ -12,15 +12,16 @@ const TaskList = ({ data }) => {
     >
       {data.tasks.map((element, index) => {
         if (element.active) {
-          return <AcceptTasks key={index} data={element} />;
+          return <ActiveTasks key={index} data={element} />;
         }
         if (element.newTask) {
           return <NewTasks key={index} data={element} employeeData={data} />;
         }
 
-        if (element.completed) {
+        /*if (element.completed) {
           return <CompleteTasks key={index} data={element} />;
         }
+          */
 
         if (element.failed) {
           return <FailedTasks key={index} data={element} />;

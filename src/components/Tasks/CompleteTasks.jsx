@@ -1,5 +1,8 @@
 import React from "react";
 
+/*  THIS COMPONENT IS NOT REQUIRED, AS THE EMPLOYEE CAN USE THE ActiveTasks.jsx to mark the task as complete or failed. */
+// ************************************
+
 const CompleteTasks = ({ data }) => {
   const handleCompleted = () => {
     data.taskCounts.tasks.forEach((elem) => {

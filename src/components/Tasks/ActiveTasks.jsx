@@ -1,11 +1,28 @@
-import React from "react";
-import {motion} from "motion/react";
+import React, { useContext, useEffect } from "react";
+import { motion } from "motion/react";
+import { AuthContext } from "../../context/AuthProvider";
 const ActiveTasks = ({ data }) => {
+  const [userData, setUserData] = useContext(AuthContext);
+  useEffect(() => {
+    console.log("userData:", userData);
+    console.log("data:", data);
+  }, []);
+
   const handleCompleted = () => {
     data.taskCounts.tasks.forEach((elem) => {
       if (elem.title === data.title) elem.completed = true;
     });
     console.log("Completed");
+  };
+
+  const handleFailed = () => {
+    
+    console.log("currentEmp:", currentEmp);
+    const currentTask = userData.forEach((employee) => {
+      employee.tasks.find((task) => task.id === data.id);
+    });
+
+    console.log("Failed the task");
   };
 
   return (
@@ -31,6 +48,7 @@ const ActiveTasks = ({ data }) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           className="py-1 px-2 bg-red-600 rounded text-sm "
+          onClick={handleFailed}
         >
           Mark as Failed
         </motion.button>

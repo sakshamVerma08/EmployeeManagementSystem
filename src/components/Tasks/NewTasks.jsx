@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-
+import { motion } from "motion/react";
 const NewTasks = ({ data, employeeData }) => {
   const [newTaskStatus, setnewTaskStatus] = useState(true);
   const acceptNewTask = () => {
-    /*employeeData.tasks.forEach((elem) => {
-      if (elem.title === data.title) {
+    employeeData.tasks.forEach((elem) => {
+      if (elem.id === data.id) {
         elem.active = true;
         elem.newTask = false;
       }
-    });*/
+    });
+
     const taskIndex = employeeData.tasks.findIndex((elem) => {
       return elem.newTask === true;
     });
@@ -42,23 +43,13 @@ const NewTasks = ({ data, employeeData }) => {
       <p className="text-sm mt-3">{data.description}</p>
 
       <div className="mt-4">
-        {newTaskStatus === true ? (
-          <button
-            onClick={acceptNewTask}
-            className="py-1 px-2 bg-green-600 rounded text-sm "
-          >
-            Accept Task
-          </button>
-        ) : (
-          <div className="flex justify-between mt-4">
-            <button className="py-1 px-2 bg-green-600 rounded text-sm ">
-              Mark as Completed
-            </button>
-            <button className="py-1 px-2 bg-red-600 rounded text-sm ">
-              Mark as Failed
-            </button>
-          </div>
-        )}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          onClick={acceptNewTask}
+          className="py-1 px-2 bg-green-600 rounded text-sm "
+        >
+          Accept Task
+        </motion.button>
       </div>
     </div>
   );

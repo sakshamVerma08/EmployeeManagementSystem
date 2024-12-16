@@ -45,22 +45,25 @@ body {
 }
 
 .login-div2 {
-  margin-left:2.5%;
+  margin-left: 2.5%;
   width: 25vw;
 }
 
 #login-div1 {
   position: relative;
   width: 50vw;
-  height: 95vh;
-  margin-right: 5%;
+  min-height: 80vh;
   z-index: 3;
+  margin-top: 5%;
 }
 #titleText {
-  font-size: 50px;
-  color: #867d7d;
+  font-size: 5vw;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+#titleText span {
+  color: whitesmoke;
 }
 
 .title-container {
@@ -82,8 +85,7 @@ body {
 }
 
 @media (max-width: 700px) {
-  .responsive-input{
-   
+  .responsive-input {
   }
 }
 @media (max-width: 420px) {

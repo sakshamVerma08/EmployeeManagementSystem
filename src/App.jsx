@@ -29,7 +29,7 @@ const App = () => {
   }, [userData]);
 
   const handleLogin = (email, password) => {
-    if (email === "saksham8@gmail.com" && password === "sak") {
+    if (email === "sak45@gmail.com" && password === "12345") {
       // setting 'user' state to admin, coz admin is currently logged in.
       setUser("admin");
       // Setting loggedInUserData to adminData

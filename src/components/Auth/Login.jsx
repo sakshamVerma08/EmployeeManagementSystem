@@ -18,7 +18,7 @@ const Login = ({ handleLogin }) => {
       <div className=" flex items-center justify-between h-screen ">
         {/* login-DIV 2*/}
         <div className="login-div2">
-          <div className=" h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 bg-slate-200  ">
+          <div className=" h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 ">
             {/* FORM */}
             <form
               onSubmit={(e) => {
@@ -71,7 +71,7 @@ const Login = ({ handleLogin }) => {
             </span>
           </h1>
         </div>
-        <motion.div id="gola1"></motion.div>
+        {/* <motion.div id="gola1"></motion.div> */}
       </div>
     </>
   );

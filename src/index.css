@@ -15,8 +15,9 @@
 html,
 body {
   height: 100%;
-  background-color: #000;
+  background-color: #0e0e0e;
   width: 100%;
+  position: relative;
 }
 
 #tasklist::-webkit-scrollbar {
@@ -31,14 +32,11 @@ body {
   background-color: blue;
 }
 
-#login-div1{
-  background-color: grey;
-  
-}
-
 #gola1 {
   background-color: #e16c18;
-  position: relative;
+  position: absolute;
+  right: 0;
+  z-index: 2;
   height: 45vh;
   width: 45vh;
   border-radius: 50%;
@@ -46,12 +44,17 @@ body {
   /* opacity:0; */
 }
 
-#gola2 {
-  background-color: #e16c18;
+.login-div2 {
+  margin-left:2.5%;
+  width: 25vw;
+}
+
+#login-div1 {
   position: relative;
-  height: 45vh;
-  width: 45vh;
-  border-radius: 25%;
+  width: 50vw;
+  height: 95vh;
+  margin-right: 5%;
+  z-index: 3;
 }
 #titleText {
   font-size: 50px;
@@ -64,6 +67,10 @@ body {
   font-size: 50px;
 }
 
+.login-div2 {
+  height: 95vh;
+}
+
 /************* MEDIA QUERIES ****************/
 
 @media (max-width: 341px) {
@@ -73,8 +80,14 @@ body {
     max-width: 100%;
   }
 }
+
+@media (max-width: 700px) {
+  .responsive-input{
+   
+  }
+}
 @media (max-width: 420px) {
-  .responsive-login {
+  .login-div2 {
     margin: 0;
     width: 100%;
     border-radius: 0%;

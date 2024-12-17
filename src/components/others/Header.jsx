@@ -59,7 +59,7 @@ const Header = ({ data, changeUser }) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleLogout}
-          className=" responsive-btn bg-red-600 rounded-sm text-white px-5 py-2 text-lg font-medium "
+          className=" logout-btn bg-red-600 rounded-sm text-white px-5 py-2 text-lg font-medium "
         >
           Log out
         </motion.button>

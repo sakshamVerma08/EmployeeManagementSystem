@@ -31,7 +31,7 @@ const NewTasks = ({ data, employeeData }) => {
   }, [data.title]);
 
   return (
-    <div className=" flex-shrink-0 bg-indigo-600 w-[400px] py-5 px-3 h-full rounded-xl">
+    <div className="new-tasks  flex-shrink-0 bg-indigo-600 w-[400px] py-5 px-3 h-full rounded-xl">
       <div className="flex justify-between items-center">
         <h3 className="bg-red-700 text-sm rounded-lg px-3 py-1">
           {data.category}
@@ -46,7 +46,7 @@ const NewTasks = ({ data, employeeData }) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           onClick={acceptNewTask}
-          className="py-1 px-2 bg-green-600 rounded text-sm "
+          className="responsive-btn py-1 px-2 bg-green-600 rounded text-sm "
         >
           Accept Task
         </motion.button>

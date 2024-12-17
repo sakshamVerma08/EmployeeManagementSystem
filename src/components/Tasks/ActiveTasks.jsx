@@ -16,7 +16,6 @@ const ActiveTasks = ({ data }) => {
   };
 
   const handleFailed = () => {
-    
     console.log("currentEmp:", currentEmp);
     const currentTask = userData.forEach((employee) => {
       employee.tasks.find((task) => task.id === data.id);
@@ -26,7 +25,7 @@ const ActiveTasks = ({ data }) => {
   };
 
   return (
-    <div className=" flex-shrink-0 bg-red-400 w-[400px] py-5 px-3 h-full rounded-xl">
+    <div className="active-tasks flex-shrink-0 bg-red-400 w-[400px] py-5 px-3 h-full rounded-xl">
       <div className="flex justify-between items-center">
         <h3 className="bg-red-700 text-sm rounded-lg px-3 py-1">
           {data.category}
@@ -41,13 +40,13 @@ const ActiveTasks = ({ data }) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           onClick={handleCompleted}
-          className="py-1 px-2 bg-green-600 rounded text-sm "
+          className=" responsive-btn py-1 px-2 bg-green-600 rounded text-sm "
         >
           Mark as Completed
         </motion.button>
         <motion.button
           whileHover={{ scale: 1.1 }}
-          className="py-1 px-2 bg-red-600 rounded text-sm "
+          className=" responsive-btn py-1 px-2 bg-red-600 rounded text-sm "
           onClick={handleFailed}
         >
           Mark as Failed

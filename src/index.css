@@ -131,7 +131,7 @@ body {
     width: 100%;
   }
 
-  .responsive-btn {
+  .logout-btn {
     opacity: 0;
   }
 
@@ -154,10 +154,44 @@ body {
     flex-wrap: wrap;
     padding: 15px;
   }
+
+  .tasklist-children .active-tasks {
+    width: auto;
+    height: 50%;
+  }
+  .tasklist-children .new-tasks {
+    width: auto;
+    height: 50%;
+  }
+  .tasklist-children .failed-tasks {
+    width: auto;
+    height: 50%;
+  }
+
+  .responsive-btn {
+    margin: 2px;
+    height: auto;
+    width: 40vw;
+  }
 }
 
 @media (max-width: 495px) {
   .responsive-tasks div h3 {
     font-size: 92%;
+  }
+}
+
+@media (max-width: 927px) {
+  .tasklist-children .active-tasks {
+    width: auto;
+    height: 50%;
+  }
+  .tasklist-children .new-tasks {
+    width: auto;
+    height: 50%;
+  }
+  .tasklist-children .failed-tasks {
+    width: auto;
+    height: 50%;
   }
 }

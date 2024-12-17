@@ -8,14 +8,22 @@ const TaskList = ({ data }) => {
   return (
     <div
       id="tasklist"
-      className="w-full py-5  overflow-x-auto flex gap-5 flex-nowrap items-center justify-start h-[55%]  mt-10"
+      className=" w-full py-5  overflow-x-auto flex gap-5 flex-nowrap items-center justify-start h-[55%]  mt-10"
     >
       {data.tasks.map((element, index) => {
         if (element.active) {
-          return <ActiveTasks key={index} data={element} />;
+          return (
+            <div className="tasklist-children">
+              <ActiveTasks key={index} data={element} />
+            </div>
+          );
         }
         if (element.newTask) {
-          return <NewTasks key={index} data={element} employeeData={data} />;
+          return (
+            <div className="tasklist-children">
+              <NewTasks key={index} data={element} employeeData={data} />
+            </div>
+          );
         }
 
         /*if (element.completed) {
@@ -24,7 +32,11 @@ const TaskList = ({ data }) => {
           */
 
         if (element.failed) {
-          return <FailedTasks key={index} data={element} />;
+          return (
+            <div className="tasklist-children">
+              <FailedTasks key={index} data={element} />
+            </div>
+          );
         }
       })}
     </div>

@@ -62,7 +62,14 @@ const App = () => {
     } else if (userData) {
       const employee = userData.find((e) => {
         if (email === e.email && password === e.password) return true;
-        else return false;
+        // If the credentials are wrong, display an alert .
+        else {
+          setAlertMessage("Wrong Credentials were entered!");
+          setAlertType("warning");
+          showAlert();
+
+          return false;
+        }
       });
 
       if (employee) {

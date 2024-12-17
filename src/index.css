@@ -110,8 +110,6 @@ body {
   height: 95vh;
 }
 
-
-
 /************* MEDIA QUERIES ****************/
 @media (max-width: 425px) {
   .login-div2 {
@@ -120,6 +118,13 @@ body {
     border-radius: 0%;
     max-width: 100%;
     padding: 3;
+  }
+
+  .responsive-tasks div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .sidebar {
@@ -140,5 +145,19 @@ body {
     padding: 10px 12px;
     font-size: 14px;
     max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .responsive-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 495px) {
+  .responsive-tasks div h3 {
+    font-size: 92%;
   }
 }

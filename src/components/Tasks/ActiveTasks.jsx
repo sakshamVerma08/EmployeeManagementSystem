@@ -26,7 +26,7 @@ const ActiveTasks = ({ data }) => {
 
   return (
     <div className="active-tasks flex-shrink-0 bg-red-400 w-[400px] py-5 px-3 h-full rounded-xl">
-      <div className="flex justify-between items-center">
+      <div id="date-container" className="flex justify-between items-center">
         <h3 className="bg-red-700 text-sm rounded-lg px-3 py-1">
           {data.category}
         </h3>

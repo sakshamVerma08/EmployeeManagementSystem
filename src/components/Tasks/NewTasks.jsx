@@ -32,7 +32,7 @@ const NewTasks = ({ data, employeeData }) => {
 
   return (
     <div className="new-tasks flex-shrink-0 bg-indigo-600 w-[400px] py-5 px-3 h-full rounded-xl">
-      <div className="flex justify-between items-center">
+      <div id="date-container" className="flex justify-between items-center ">
         <h3 className="bg-red-700 text-sm rounded-lg px-3 py-1">
           {data.category}
         </h3>

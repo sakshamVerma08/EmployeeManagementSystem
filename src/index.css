@@ -236,4 +236,15 @@ body {
   .responsive-tasks div {
     width: 75%;
   }
+
+  #date-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  #date-container h3{
+    margin-bottom: 15px;
+  }
 }

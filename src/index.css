@@ -148,11 +148,42 @@ body {
   }
 }
 
+@media (max-width: 575.98px) {
+  #loginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  #login-div1 {
+    margin: 7% 7%;
+    width: 70%;
+  }
+
+  #login-div1 #titleText {
+    margin-bottom: 15%;
+    font-size: 8vw;
+  }
+
+  #login-div1 #desc {
+    font-size: medium;
+    line-height: 23.5px;
+  }
+}
+
 @media (max-width: 767px) {
   .responsive-tasks {
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
+  }
+
+  #titleText span {
+    font-size: larger;
   }
 
   .tasklist-children {
@@ -196,6 +227,10 @@ body {
   .tasklist-children .active-tasks {
     width: 100%;
     height: auto;
+  }
+
+  .responsiveForm button {
+    font-size: medium;
   }
   .tasklist-children .new-tasks {
     width: 100%;
@@ -244,7 +279,14 @@ body {
     align-items: flex-start;
   }
 
-  #date-container h3{
+  #date-container h3 {
     margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 875px) {
+  .login-div2 div {
+    width: 34vw;
+    height: auto;
   }
 }

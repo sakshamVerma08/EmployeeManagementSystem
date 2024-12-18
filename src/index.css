@@ -173,6 +173,12 @@ body {
     font-size: medium;
     line-height: 23.5px;
   }
+
+   .login-div2 div{
+    margin-left: 25vw;
+    width: 30vw;
+
+   }
 }
 
 @media (max-width: 767px) {

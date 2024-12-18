@@ -59,7 +59,7 @@ const Login = ({ handleLogin }) => {
                 <br />
                 <br />
                 Admins can efficiently assign tasks to employees, monitor their
-                progress, and update task statuses to "Complete" or "Fail."{" "}
+                progress, and update task statuses to "Complete" or "Fail."
                 <br />
                 <br />
                 Employees can view their assigned tasks, update their progress,
@@ -72,8 +72,10 @@ const Login = ({ handleLogin }) => {
             </h2>
           </div>
           {/* login-DIV 2*/}
-          <div className="login-div2">
-            <div className=" h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 ">
+          <div className="login-div2 w-64">
+            <div
+              className={` h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 `}
+            >
               {/* FORM */}
               <form
                 onSubmit={(e) => {

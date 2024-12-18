@@ -155,17 +155,28 @@ body {
     padding: 15px;
   }
 
+  .tasklist-children {
+    display: flex;
+    scroll-snap-type: x mandatory;
+  }
+
   .tasklist-children .active-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    flex: 0 0 100%;
   }
   .tasklist-children .new-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    flex: 0 0 100%;
   }
   .tasklist-children .failed-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    flex: 0 0 100%;
   }
 
   .responsive-btn {
@@ -183,15 +194,46 @@ body {
 
 @media (max-width: 927px) {
   .tasklist-children .active-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
   }
   .tasklist-children .new-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
   }
   .tasklist-children .failed-tasks {
-    width: auto;
-    height: 50%;
+    width: 100%;
+    height: auto;
+  }
+
+  .tasklist-children {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    margin-right: 25%;
+  }
+
+  .tasklist-children .new-tasks {
+    width: 85vw;
+  }
+}
+
+@media (max-width: 510px) {
+  .tasklist-children {
+    width: 60vw;
+    height: auto;
+    margin-right: 15%;
+  }
+}
+
+@media (max-width: 350px) {
+  .responsive-tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .responsive-tasks div {
+    width: 75%;
   }
 }

@@ -13,14 +13,14 @@ const TaskList = ({ data }) => {
       {data.tasks.map((element, index) => {
         if (element.active) {
           return (
-            <div className="tasklist-children">
-              <ActiveTasks key={index} data={element} />
+            <div key={index} className="tasklist-children">
+              <ActiveTasks data={element} />
             </div>
           );
         }
         if (element.newTask) {
           return (
-            <div className="tasklist-children">
+            <div key={index} className="tasklist-children">
               <NewTasks key={index} data={element} employeeData={data} />
             </div>
           );
@@ -33,7 +33,7 @@ const TaskList = ({ data }) => {
 
         if (element.failed) {
           return (
-            <div className="tasklist-children">
+            <div key={index} className="tasklist-children">
               <FailedTasks key={index} data={element} />
             </div>
           );

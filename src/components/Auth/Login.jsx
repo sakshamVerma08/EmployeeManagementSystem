@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { motion, transform } from "motion/react";
+import { IoMdMenu } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 const Login = ({ handleLogin }) => {
+  const [visibleMenu, setVisibleMenu] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // On tablet view, we show the title of Welcome first , then the Login form below that.
   const [tabletView, setTabletView] = useState(window.innerWidth <= 575.98);
-
+  const [smallScreen, setSmallScreen] = useState(window.innerWidth <= 475);
+  const toggleSidebar = () => {
+    setVisibleMenu(!visibleMenu);
+  };
   useEffect(() => {
     const handleResize = () => {
       setTabletView(window.innerWidth <= 575.98);
     };
 
+    const handleSmallScren = () => {
+      setSmallScreen(window.innerWidth <= 475);
+    };
+
     window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleSmallScren);
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", handleSmallScren);
     };
   }, []);
 
@@ -72,49 +85,98 @@ const Login = ({ handleLogin }) => {
             </h2>
           </div>
           {/* login-DIV 2*/}
-          <div className="login-div2 w-64">
-            <div
-              className={` mainLogin h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 `}
-            >
-              {/* FORM */}
-              <form
-                onSubmit={(e) => {
-                  submitHandler(e);
-                }}
-                className="flex responsiveForm flex-col  "
+
+          {smallScreen ? (
+            <nav id="responsiveNav">
+              <ul className=" sidebar sidebarList">
+                <li>
+                  <IoClose onClick={toggleSidebar} size={35} />
+                </li>
+                <li>
+                  <form
+                    onSubmit={(e) => {
+                      submitHandler(e);
+                    }}
+                    className="sidebarForm"
+                  >
+                    <input
+                      value={email}
+                      autoComplete="on"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      required
+                      placeholder="Enter Email"
+                      className="sidebarInput"
+                    />
+                  </form>
+                </li>
+                <li>
+                  <form
+                    onSubmit={(e) => {
+                      submitHandler(e);
+                    }}
+                    className="sidebarForm"
+                  >
+                    <input
+                      value={password}
+                      autoComplete="on"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      required
+                      placeholder="Enter Password"
+                      className="sidebarInput placeholder:text-gray-400 bg-transparent border-"
+                    />
+                  </form>
+                </li>
+              </ul>
+            </nav>
+          ) : (
+            <div className="login-div2 w-auto w-64">
+              <div
+                className={` mainLogin h-2/3 mt-20 w-auto border-3 rounded-xl border-emerald-600 py-5 px-5 `}
               >
-                <input
-                  value={email}
-                  autoComplete="on"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
+                {/* FORM */}
+                <form
+                  onSubmit={(e) => {
+                    submitHandler(e);
                   }}
-                  className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 "
-                  required
-                  type="email"
-                  placeholder="Enter your Email"
-                />
-                <input
-                  value={password}
-                  autoComplete="on"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4  w-79"
-                  required
-                  type="password"
-                  placeholder="Enter Password"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.112 }}
-                  whileTap={{ scale: 0.9 }}
-                  className=" login-button border-none text-white outline-none textx-xl border-2 bg-emerald-600 rounded-full px-4 py-3 mt-4  w-full"
+                  className="flex responsiveForm flex-col  "
                 >
-                  Log in
-                </motion.button>
-              </form>
+                  <input
+                    value={email}
+                    autoComplete="on"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 "
+                    required
+                    type="email"
+                    placeholder="Enter your Email"
+                  />
+                  <input
+                    value={password}
+                    autoComplete="on"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    className=" responsive-input placeholder:text-gray-400 bg-transparent outline-none textx-xl border-2 border-emerald-600 rounded-full py-3 px-4 mt-4  w-79"
+                    required
+                    type="password"
+                    placeholder="Enter Password"
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.112 }}
+                    whileTap={{ scale: 0.9 }}
+                    className=" login-button border-none text-white w-auto outline-none textx-xl border-2 bg-emerald-600 rounded-full px-4 py-3 mt-4  w-full"
+                  >
+                    Log in
+                  </motion.button>
+                </form>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* <motion.div id="gola1"></motion.div> */}
         </div>

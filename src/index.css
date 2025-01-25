@@ -110,6 +110,12 @@ body {
   height: 95vh;
 }
 
+.sidebarList {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
 /************* MEDIA QUERIES ****************/
 @media (max-width: 425px) {
   .login-div2 {
@@ -175,13 +181,27 @@ body {
   }
 
   .login-div2 div {
-    margin-left: 25vw;
-    width: 30vw;
+    margin: 15vw 13vw;
+    width: 45vw;
+  }
+  .responsiveForm {
+    width: 20vw;
+  }
+  .login-div2 {
+    width: 100vw;
   }
 }
 
-.login-div2 {
-  background-color: crimson;
+@media (max-width: 475px) {
+  .login-div2 {
+    background-color: crimson;
+  }
+  .login-div2 div {
+    width: 50%;
+  }
+  .responsiveForm {
+    width: ;
+  }
 }
 
 @media (max-width: 574px) {
@@ -237,13 +257,10 @@ body {
     width: 40vw;
   }
 
-  
   .login-div2 {
     width: 40vw;
   }
-
 }
-
 
 @media (max-width: 495px) {
   .responsive-tasks div h3 {
@@ -287,13 +304,7 @@ body {
     margin-right: 15%;
   }
 }
-@media (max-width: 610px) {
-  
-  .login-div2 div {
-    background-color: red;
-    width: 100px;
-  }
-}
+
 @media (max-width: 350px) {
   .responsive-tasks {
     display: flex;

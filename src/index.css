@@ -174,11 +174,26 @@ body {
     line-height: 23.5px;
   }
 
-   .login-div2 div{
+  .login-div2 div {
     margin-left: 25vw;
     width: 30vw;
+  }
+}
 
-   }
+.login-div2 {
+  background-color: crimson;
+}
+
+@media (max-width: 574px) {
+  .login-div2 {
+    width: 95vw;
+    margin-right: 8vw;
+    justify-content: center;
+  }
+
+  .mainLogin {
+    width: 50%;
+  }
 }
 
 @media (max-width: 767px) {
@@ -221,7 +236,14 @@ body {
     height: auto;
     width: 40vw;
   }
+
+  
+  .login-div2 {
+    width: 40vw;
+  }
+
 }
+
 
 @media (max-width: 495px) {
   .responsive-tasks div h3 {
@@ -265,7 +287,13 @@ body {
     margin-right: 15%;
   }
 }
-
+@media (max-width: 610px) {
+  
+  .login-div2 div {
+    background-color: red;
+    width: 100px;
+  }
+}
 @media (max-width: 350px) {
   .responsive-tasks {
     display: flex;
@@ -292,7 +320,10 @@ body {
 
 @media (max-width: 875px) {
   .login-div2 div {
-    width: 34vw;
+    width: 32vw;
     height: auto;
+  }
+  .login-div2 {
+    width: 45vw;
   }
 }

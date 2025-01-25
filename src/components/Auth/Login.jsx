@@ -74,7 +74,7 @@ const Login = ({ handleLogin }) => {
           {/* login-DIV 2*/}
           <div className="login-div2 w-64">
             <div
-              className={` h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 `}
+              className={` mainLogin h-2/3 mt-20 border-3 rounded-xl border-emerald-600 py-5 px-5 `}
             >
               {/* FORM */}
               <form
@@ -108,7 +108,7 @@ const Login = ({ handleLogin }) => {
                 <motion.button
                   whileHover={{ scale: 1.112 }}
                   whileTap={{ scale: 0.9 }}
-                  className="  border-none text-white outline-none textx-xl border-2 bg-emerald-600 rounded-full px-4 py-3 mt-4  w-79"
+                  className=" login-button border-none text-white outline-none textx-xl border-2 bg-emerald-600 rounded-full px-4 py-3 mt-4  w-full"
                 >
                   Log in
                 </motion.button>

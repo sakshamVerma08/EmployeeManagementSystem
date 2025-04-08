@@ -12,9 +12,7 @@ const Login = ({ handleLogin }) => {
   // On tablet view, we show the title of Welcome first , then the Login form below that.
   const [tabletView, setTabletView] = useState(window.innerWidth <= 575.98);
   const [smallScreen, setSmallScreen] = useState(window.innerWidth <= 475);
-  const toggleSidebar = () => {
-    setVisibleMenu(!visibleMenu);
-  };
+
   useEffect(() => {
     const handleResize = () => {
       setTabletView(window.innerWidth <= 575.98);
@@ -50,6 +48,7 @@ const Login = ({ handleLogin }) => {
           {/* DIV 1*/}
 
           <div id="login-div1">
+            <span>Lorem ipsum dolor sit amet.</span>
             <h1 id="titleText">
               <span>
                 WELCOME TO <br />
@@ -88,9 +87,15 @@ const Login = ({ handleLogin }) => {
 
           {smallScreen ? (
             <nav id="responsiveNav">
-              <ul className=" sidebar sidebarList">
+              <ul className=" sidebar  sidebarList">
                 <li>
-                  <IoClose onClick={toggleSidebar} size={35} />
+                  <IoClose
+                    onClick={() => {
+                      setVisibleMenu(!visibleMenu);
+                    }}
+                   
+                    size={35}
+                  />
                 </li>
                 <li>
                   <form

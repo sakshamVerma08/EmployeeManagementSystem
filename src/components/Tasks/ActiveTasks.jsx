@@ -16,7 +16,6 @@ const ActiveTasks = ({ data }) => {
   };
 
   const handleFailed = () => {
-    console.log("currentEmp:", currentEmp);
     const currentTask = userData.forEach((employee) => {
       employee.tasks.find((task) => task.id === data.id);
     });

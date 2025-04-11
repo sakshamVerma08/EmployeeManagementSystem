@@ -504,8 +504,14 @@ const admin = [
     id: 1,
     name: "Saksham",
     email: "sak45@gmail.com",
-    password: "12345",
+    password: "12344",
   },
+  {
+    id:2,
+    name:"Pratibha",
+    email:"pratibhaJha22@gmail.com",
+    password:"1234"
+  }
 ];
 
 // Method below stores the data in arrays in the localStorage inn a readable format

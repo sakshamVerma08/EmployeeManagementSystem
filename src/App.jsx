@@ -4,13 +4,17 @@ import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
 import { AuthContext } from "./context/AuthProvider";
-import { parse } from "postcss";
-import { motion } from "motion/react";
+import Signup from "./components/Auth/Signup";
 import Alert from "./components/others/Alert";
+import { Routes, Route } from "react-router";
+import Welcome from "./components/Dashboard/Welcome";
 const App = () => {
   const [user, setUser] = useState(null);
-  const [userData, setUserData, adminData, setAdminData] =
-    useContext(AuthContext);
+
+  useEffect(() => {
+    const [userData, setUserData, adminData, setAdminData] =
+      useContext(AuthContext);
+  }, [user]);
 
   // This 'loggedInUserData' state is used to store the state of data of the currently logged in User.
   const [loggedInUserData, setloggedInUserData] = useState(null);
@@ -44,33 +48,26 @@ const App = () => {
   }, [userData]);
 
   const handleLogin = (email, password) => {
-    if (email === "sak45@gmail.com" && password === "12345") {
-      // setting 'user' state to admin, coz admin is currently logged in.
-      setUser("admin");
-      // Setting loggedInUserData to adminData
-      // We use .find() in adminData so we can scan the data of specific admin that has signed in, in case of multiple admins.
-      const admin = adminData[0];
+    const temp = adminData.find((e) => {
+      email === e.email && password === e.password;
+    });
 
-      if (admin) {
-        setloggedInUserData(admin);
-        localStorage.setItem(
-          "loggedInUser",
-          JSON.stringify({ role: "admin", data: admin })
-        );
-      }
-      // *************************
-    } else if (userData) {
-      const employee = userData.find((e) => {
-        if (email === e.email && password === e.password) return true;
-        // If the credentials are wrong, display an alert .
-        else {
-          setAlertMessage("Wrong Credentials were entered!");
-          setAlertType("warning");
-          showAlert();
+    // setting 'user' state to admin, coz admin is currently logged in.
+    setUser("admin");
+    // Setting loggedInUserData to adminData
+    const admin = temp;
 
-          return false;
-        }
-      });
+    if (admin) {
+      setloggedInUserData(admin);
+      localStorage.setItem(
+        "loggedInUser",
+        JSON.stringify({ role: "admin", data: admin })
+      );
+    }
+    if (userData) {
+      const employee = userData.find(
+        (e) => email === e.email && password === e.password
+      );
 
       if (employee) {
         setUser("employee");
@@ -79,9 +76,15 @@ const App = () => {
           "loggedInUser",
           JSON.stringify({ role: "employee", data: employee })
         );
+      } else {
+        setAlertMessage("Wrong Credentials were entered!");
+        setAlertType("warning");
+        showAlert();
       }
     } else {
-      alert("Invalid Credentials");
+      setAlertMessage("Invalid Credentials");
+      setAlertType("error");
+      showAlert();
     }
   };
   // ************************************
@@ -91,7 +94,32 @@ const App = () => {
   return (
     <>
       {alertVisible ? <Alert msg={alertMessage} type={alertType} /> : ""}
-      {!user ? (
+      <Routes>
+        {/* <Route path="/" element={<Welcome />} /> */}
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/home"
+          element={
+            !user ? (
+              <Login handleLogin={handleLogin} />
+            ) : user === "admin" ? (
+              <AdminDashboard
+                alertMessage={alertMessage}
+                showAlert={showAlert}
+                setAlertMessage={setAlertMessage}
+                alertType={alertType}
+                setAlertType={setAlertType}
+                changeUser={setUser}
+                data={loggedInUserData}
+              />
+            ) : user === "employee" ? (
+              <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
+            ) : null
+          }
+        />
+      </Routes>
+
+      {/* {!user ? (
         <Login handleLogin={handleLogin} />
       ) : user === "admin" ? (
         <AdminDashboard
@@ -105,7 +133,7 @@ const App = () => {
         />
       ) : user == "employee" ? (
         <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
-      ) : null}
+      ) : null}*/}
     </>
   );
 };

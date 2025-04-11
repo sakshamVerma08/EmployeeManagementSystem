@@ -32,15 +32,6 @@ const Login = ({ handleLogin }) => {
           SITE
         </h1>
 
-        <span className="font-semiboldbg-orange-600 mt-3 mb-3 text-xl underline">
-          NOTE--Since this is a frontend project, please choose among these
-          usernames and passwords to explore this app. More work will be done on
-          thise soon.
-        </span>
-
-        <div className="">
-          
-        </div>
         <h2 id="desc" className="text-base w-full sm:w-full  ">
           Welcome to the Employee Management System, a streamlined platform
           <br />
@@ -65,6 +56,7 @@ const Login = ({ handleLogin }) => {
         </h2>
       </div>
 
+    
       {/** Login form section – on mobile it appears second and on desktop we force it to appear on the left */}
       <div
         id="login-div2"

@@ -11,9 +11,9 @@ A modern, responsive web app for managing employees and their tasks. Built with 
 
 | Role     | Email                   | Password  |
 |----------|-------------------------|-----------|
-| Admin    | `admin@example.com`     | `admin123`|
-| Employee | `employee1@example.com` | `emp12345`|
-| Employee | `employee2@example.com` | `emp12345`|
+| Admin    | `sak45@gmail.com`| `12345`
+| Employee | `amitvirmani1972@gmail.com` | `1234`|
+| Employee | `nandiniverma1999@gmail.com` | `1234`|
 
 ---
 

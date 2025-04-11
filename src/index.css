@@ -115,7 +115,6 @@ body {
   justify-content: flex-start;
 }
 
-
 /************* MEDIA QUERIES ****************/
 @media (max-width: 425px) {
   .login-div2 {
@@ -158,7 +157,6 @@ body {
   #loginPage {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
     position: relative;
     height: 100%;
@@ -166,8 +164,7 @@ body {
   }
 
   #login-div1 {
-    margin: 7% 7%;
-    width: 70%;
+    width: 100%;
   }
 
   #login-div1 #titleText {
@@ -215,7 +212,7 @@ body {
     width: 50%;
   }
 }
-
+/* 
 @media (max-width: 767px) {
   .responsive-tasks {
     display: flex;
@@ -260,7 +257,7 @@ body {
   .login-div2 {
     width: 40vw;
   }
-}
+} */
 
 @media (max-width: 495px) {
   .responsive-tasks div h3 {
@@ -329,7 +326,7 @@ body {
   }
 }
 
-@media (max-width: 875px) {
+/* @media (max-width: 875px) {
   .login-div2 div {
     width: 32vw;
     height: auto;
@@ -337,4 +334,4 @@ body {
   .login-div2 {
     width: 45vw;
   }
-}
+} */

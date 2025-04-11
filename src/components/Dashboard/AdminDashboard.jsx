@@ -8,7 +8,7 @@ const AdminDashboard = ({
   changeUser,
   showAlert,
   setAlertMessage,
-  setAlertType
+  setAlertType,
 }) => {
   return (
     <div className="h-screen w-full p-10">

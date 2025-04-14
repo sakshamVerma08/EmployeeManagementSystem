@@ -8,6 +8,13 @@ import Signup from "./components/Auth/Signup";
 import Alert from "./components/others/Alert";
 import { Routes, Route } from "react-router";
 import Welcome from "./components/Dashboard/Welcome";
+
+
+
+
+
+
+
 const App = () => {
   const [user, setUser] = useState(null);
 

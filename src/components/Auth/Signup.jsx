@@ -13,10 +13,10 @@ const Signup = ({ user, setUser }) => {
   console.log("employeedata = ", employeeData);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let currentId = employeeData[employeeData.length - 1].id;
-    console.log("current ID = ", currentId);
-  }, [employeeData]);
+  // useEffect(() => {
+  //   let currentId = employeeData[employeeData.length - 1].id;
+  //   console.log("current ID = ", currentId);
+  // }, [employeeData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

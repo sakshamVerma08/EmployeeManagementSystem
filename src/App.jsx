@@ -7,23 +7,21 @@ import { AuthContext } from "./context/AuthProvider";
 import Signup from "./components/Auth/Signup";
 import Alert from "./components/others/Alert";
 import { Routes, Route } from "react-router";
-import Welcome from "./components/Dashboard/Welcome";
-
-
-
-
-
-
+// import Welcome from "./components/Dashboard/Welcome";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData, adminData, setAdminData] =
+    useContext(AuthContext);
 
-  useEffect(() => {
+  console.log("user data = ", userData);
+
+  /* useEffect(() => {
     const [userData, setUserData, adminData, setAdminData] =
       useContext(AuthContext);
-  }, [user]);
+  }, [user]);*/
 
-  // This 'loggedInUserData' state is used to store the state of data of the currently logged in User.
+  // This 'loggedInUserData' state is used to store the state of data of the currently logged in User from the fix arrya of Employees.
   const [loggedInUserData, setloggedInUserData] = useState(null);
 
   // Alert component states. For type of alert, message displayed inside alert, visibility of alert component.
@@ -58,6 +56,12 @@ const App = () => {
     const temp = adminData.find((e) => {
       email === e.email && password === e.password;
     });
+
+    if (temp === undefined) {
+      console.log(
+        "Wrong Credentials were Entered. No admins found in (admins array)DB"
+      );
+    }
 
     // setting 'user' state to admin, coz admin is currently logged in.
     setUser("admin");
@@ -103,7 +107,10 @@ const App = () => {
       {alertVisible ? <Alert msg={alertMessage} type={alertType} /> : ""}
       <Routes>
         {/* <Route path="/" element={<Welcome />} /> */}
-        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/signup"
+          element={<Signup user={user} setUser={setUser} />}
+        />
         <Route
           path="/home"
           element={

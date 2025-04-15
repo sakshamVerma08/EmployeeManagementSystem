@@ -1,23 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-// import { useToast } from "@/components/ui/use-toast";
+import { AuthContext } from "../../context/AuthProvider";
 
-const Signup = () => {
+const Signup = ({ user, setUser }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [employeeData] = useContext(AuthContext);
+  console.log("employeedata = ", employeeData);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    let currentId = employeeData[employeeData.length - 1].id;
+    console.log("current ID = ", currentId);
+  }, [employeeData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        
-    // Reset form
+
+    // logic to create new user
+    let newUser = {
+      id: Date.now(), 
+      name,
+      email,
+      password,
+      taskCounts: {
+        active: 0,
+        completed: 0,
+        newTask: 0,
+        failed: 0,
+      },
+      tasks: [],
+    };
+
+    const existingData = JSON.parse(localStorage.getItem("employees")) || [];
+
+    existingData.push(newUser);
     setName("");
     setEmail("");
     setPassword("");
+
+    // make the user navigate to the employee dashboard
+    // use useNavigate()
+
+    navigate("");
   };
 
   return (
@@ -26,21 +55,25 @@ const Signup = () => {
       <div className="order-1 md:order-2 md:w-1/2 bg-emerald-50 p-6 flex flex-col justify-center">
         <div className="max-w-md mx-auto">
           <h1 className="text-3xl font-bold text-emerald-800 mb-6">
-            JOIN OUR<br />
-            DIGITAL<br />
+            JOIN OUR
+            <br />
+            DIGITAL
+            <br />
             COMMUNITY
           </h1>
-          
+
           <div className="space-y-4 text-gray-700">
-            <p className = "text-black">
-              Create your account today and unlock the full potential of our platform.
+            <p className="text-black">
+              Create your account today and unlock the full potential of our
+              platform.
             </p>
-            
-            <p className = "text-black">
-              Join thousands of professionals who trust our services for their daily workflows.
+
+            <p className="text-black">
+              Join thousands of professionals who trust our services for their
+              daily workflows.
             </p>
-            
-            <p className = "text-black">
+
+            <p className="text-black">
               Your journey to better productivity begins with a simple sign-up.
             </p>
           </div>
@@ -51,13 +84,18 @@ const Signup = () => {
       <div className="order-2 md:order-1 md:w-1/2 flex flex-col justify-center items-center p-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-emerald-600">Create Account</h2>
+            <h2 className="text-3xl font-bold text-emerald-600">
+              Create Account
+            </h2>
             <p className="text-gray-600 mt-2">Sign up to get started</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
                 Full Name
               </label>
               <input
@@ -70,9 +108,12 @@ const Signup = () => {
                 className="w-full px-4 py-3 rounded-full border-2 border-emerald-600 bg-transparent outline-none text-white placeholder-gray-400"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
                 Email
               </label>
               <input
@@ -85,9 +126,12 @@ const Signup = () => {
                 className="w-full px-4 py-3 rounded-full border-2 border-emerald-600 bg-transparent outline-none text-white placeholder-gray-400"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="relative">
@@ -105,7 +149,11 @@ const Signup = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 "
                 >
-                  {showPassword ? <FaEye size={20} /> : <FaEyeSlash size={20} />}
+                  {showPassword ? (
+                    <FaEye size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
                 </button>
               </div>
               <p className="text-xs text-gray-500 mt-1">
@@ -126,11 +174,17 @@ const Signup = () => {
               <div className="ml-3 text-sm">
                 <label htmlFor="terms" className="text-gray-700">
                   I agree to the{" "}
-                  <a href="#" className="text-emerald-600 hover:text-emerald-500">
+                  <a
+                    href="#"
+                    className="text-emerald-600 hover:text-emerald-500"
+                  >
                     Terms of Service
                   </a>{" "}
                   and{" "}
-                  <a href="#" className="text-emerald-600 hover:text-emerald-500">
+                  <a
+                    href="#"
+                    className="text-emerald-600 hover:text-emerald-500"
+                  >
                     Privacy Policy
                   </a>
                 </label>
@@ -147,7 +201,10 @@ const Signup = () => {
             <div className="text-center mt-6">
               <p className="text-gray-600">
                 Already have an account?{" "}
-                <Link to="/login" className="font-medium text-emerald-600 hover:text-emerald-500">
+                <Link
+                  to="/login"
+                  className="font-medium text-emerald-600 hover:text-emerald-500"
+                >
                   Sign in
                 </Link>
               </p>

@@ -514,7 +514,7 @@ const admin = [
   }
 ];
 
-// Method below stores the data in arrays in the localStorage inn a readable format
+// Method below stores the data in arrays in the localStorage in a readable format
 export const setLocalStorage = () => {
   localStorage.setItem("employees", JSON.stringify(employees));
   localStorage.setItem("admin", JSON.stringify(admin));

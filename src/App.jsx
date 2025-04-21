@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useContext, useEffect, useState } from "react";
 import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
@@ -6,7 +7,7 @@ import { getLocalStorage, setLocalStorage } from "./utils/localStorage";
 import { AuthContext } from "./context/AuthProvider";
 import Signup from "./components/Auth/Signup";
 import Alert from "./components/others/Alert";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate, useNavigate } from "react-router";
 // import Welcome from "./components/Dashboard/Welcome";
 
 const App = () => {
@@ -28,6 +29,8 @@ const App = () => {
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   // This function toggles the visibility of alert.
   const showAlert = () => {
@@ -61,11 +64,10 @@ const App = () => {
       console.log(
         "Wrong Credentials were Entered. No admins found in (admins array)DB"
       );
+      return false;
     }
 
-    // setting 'user' state to admin, coz admin is currently logged in.
     setUser("admin");
-    // Setting loggedInUserData to adminData
     const admin = temp;
 
     if (admin) {
@@ -74,7 +76,10 @@ const App = () => {
         "loggedInUser",
         JSON.stringify({ role: "admin", data: admin })
       );
+      navigate("/admin");
+      return true;
     }
+
     if (userData) {
       const employee = userData.find(
         (e) => email === e.email && password === e.password
@@ -87,17 +92,15 @@ const App = () => {
           "loggedInUser",
           JSON.stringify({ role: "employee", data: employee })
         );
+        navigate("/employee");
+        return true;
       } else {
-        setAlertMessage("Wrong Credentials were entered!");
-        setAlertType("warning");
-        showAlert();
+        return false;
       }
-    } else {
-      setAlertMessage("Invalid Credentials");
-      setAlertType("error");
-      showAlert();
     }
+    return false;
   };
+
   // ************************************
   // ***********************************
 
@@ -107,16 +110,13 @@ const App = () => {
       {alertVisible ? <Alert msg={alertMessage} type={alertType} /> : ""}
       <Routes>
         {/* <Route path="/" element={<Welcome />} /> */}
+        <Route path="/" element={<Signup user={user} setUser={setUser} />} />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+
         <Route
-          path="/signup"
-          element={<Signup user={user} setUser={setUser} />}
-        />
-        <Route
-          path="/home"
+          path="/admin"
           element={
-            !user ? (
-              <Login handleLogin={handleLogin} />
-            ) : user === "admin" ? (
+            user === "admin" ? (
               <AdminDashboard
                 alertMessage={alertMessage}
                 showAlert={showAlert}
@@ -126,28 +126,23 @@ const App = () => {
                 changeUser={setUser}
                 data={loggedInUserData}
               />
-            ) : user === "employee" ? (
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/employee"
+          element={
+            user === "employee" ? (
               <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
-            ) : null
+            ) : (
+              <Navigate to="/login" replace />
+            )
           }
         />
       </Routes>
-
-      {/* {!user ? (
-        <Login handleLogin={handleLogin} />
-      ) : user === "admin" ? (
-        <AdminDashboard
-          alertMessage={alertMessage}
-          showAlert={showAlert}
-          setAlertMessage={setAlertMessage}
-          alertType={alertType}
-          setAlertType={setAlertType}
-          changeUser={setUser}
-          data={loggedInUserData}
-        />
-      ) : user == "employee" ? (
-        <EmployeeDashboard changeUser={setUser} data={loggedInUserData} />
-      ) : null}*/}
     </>
   );
 };

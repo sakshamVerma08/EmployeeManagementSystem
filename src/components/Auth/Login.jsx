@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { motion } from "motion/react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -9,11 +11,23 @@ const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Reset form
+    setEmail("");
+    setPassword("");
+
+    const loginSuccess = handleLogin(email, password);
+
+    if (!loginSuccess) {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    }
+
     setEmail("");
     setPassword("");
   };
@@ -118,7 +132,7 @@ const Login = ({ handleLogin }) => {
               <p className="text-gray-600">
                 Don't have an account?{" "}
                 <Link
-                  to="/signup"
+                  to="/"
                   className="font-medium text-emerald-600 hover:text-emerald-500"
                 >
                   Sign up
@@ -164,6 +178,10 @@ const Login = ({ handleLogin }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default Login;

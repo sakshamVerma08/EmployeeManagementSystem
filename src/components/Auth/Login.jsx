@@ -123,7 +123,6 @@ const Login = ({ handleLogin }) => {
             <button
               type="submit"
               className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full transition-transform hover:scale-[1.03] active:scale-[0.97]"
-              onClick={handleLogin(email, password)}
             >
               Sign In
             </button>

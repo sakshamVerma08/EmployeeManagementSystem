@@ -56,21 +56,13 @@ const App = () => {
   }, [userData]);
 
   const handleLogin = (email, password) => {
-    const temp = adminData.find((e) => {
-      email === e.email && password === e.password;
-    });
-
-    if (temp === undefined) {
-      console.log(
-        "Wrong Credentials were Entered. No admins found in (admins array)DB"
-      );
-      return false;
-    }
-
-    setUser("admin");
-    const admin = temp;
+    // First check admin credentials
+    const admin = adminData?.find(
+      (e) => e.email === email && e.password === password
+    );
 
     if (admin) {
+      setUser("admin");
       setloggedInUserData(admin);
       localStorage.setItem(
         "loggedInUser",
@@ -80,9 +72,10 @@ const App = () => {
       return true;
     }
 
+    // Then check employee credentials
     if (userData) {
       const employee = userData.find(
-        (e) => email === e.email && password === e.password
+        (e) => e.email === email && e.password === password
       );
 
       if (employee) {
@@ -94,10 +87,9 @@ const App = () => {
         );
         navigate("/employee");
         return true;
-      } else {
-        return false;
       }
     }
+
     return false;
   };
 

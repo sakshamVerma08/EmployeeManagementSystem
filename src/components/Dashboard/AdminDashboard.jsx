@@ -11,14 +11,24 @@ const AdminDashboard = ({
   setAlertType,
 }) => {
   return (
-    <div className="h-screen w-full p-10">
-      <Header changeUser={changeUser} data={data} />
-      <CreateTask
-        showAlert={showAlert}
-        setAlertType={setAlertType}
-        setAlertMessage={setAlertMessage}
-      />
-      <AllTasks />
+    <div className="min-h-screen w-full p-4 md:p-6 lg:p-10">
+      <div className="max-w-7xl mx-auto">
+        <Header changeUser={changeUser} data={data} />
+
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="lg:col-span-2">
+            <CreateTask
+              showAlert={showAlert}
+              setAlertType={setAlertType}
+              setAlertMessage={setAlertMessage}
+            />
+          </div>
+
+          <div className="lg:col-span-2">
+            <AllTasks />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

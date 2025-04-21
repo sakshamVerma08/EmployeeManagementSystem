@@ -43,7 +43,7 @@ const Signup = ({ user, setUser }) => {
     setEmail("");
     setPassword("");
 
-    if (role === "user") {
+    if (role === "employee") {
       navigate("/employee");
     } else {
       navigate("/admin");
@@ -268,8 +268,8 @@ const Signup = ({ user, setUser }) => {
                 <option value="" disabled className="bg-gray-800">
                   Select your role
                 </option>
-                <option value="user" className="bg-gray-800">
-                  User
+                <option value="employee" className="bg-gray-800">
+                  Employee
                 </option>
                 <option value="admin" className="bg-gray-800">
                   Admin

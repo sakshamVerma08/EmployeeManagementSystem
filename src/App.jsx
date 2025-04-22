@@ -13,7 +13,8 @@ import { Routes, Route, Navigate, useNavigate } from "react-router";
 const App = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [userData, setUserData, adminData, setAdminData] = useContext(AuthContext);
+  const [userData, setUserData, adminData, setAdminData] =
+    useContext(AuthContext);
   const [loggedInUserData, setloggedInUserData] = useState(null);
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
@@ -38,7 +39,9 @@ const App = () => {
   };
 
   const handleLogin = (email, password) => {
-    const admin = adminData?.find((e) => e.email === email && e.password === password);
+    const admin = adminData?.find(
+      (e) => e.email === email && e.password === password
+    );
 
     if (admin) {
       setUser("admin");
@@ -50,7 +53,7 @@ const App = () => {
       navigate("/admin");
       return true;
     }
-    
+
     if (userData) {
       const employee = userData.find(
         (e) => e.email === email && e.password === password

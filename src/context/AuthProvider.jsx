@@ -7,27 +7,24 @@ const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [adminData, setAdminData] = useState(null);
 
-  // Initialize data from localStorage on mount
+  // We use AuthProvider to transfer the data, stored in LocalStorage, to other components.
+  // We use state "userData" and keep updating it in the side stack using 'useEffect' hook. We get the data stored in Local Storage
+  // by using the "getLocalStorage" method defined in the localStorage.jsx .
   useEffect(() => {
+    // We seperately store the employeeData and adminData, that was incoming from the Local Storage.
     const { employeeData, adminData } = getLocalStorage();
     setUserData(employeeData);
     setAdminData(adminData);
   }, []);
 
-  // Update localStorage whenever userData or adminData changes
-  useEffect(() => {
-    if (userData && adminData) {
-      localStorage.setItem("employees", JSON.stringify(userData));
-      localStorage.setItem("admin", JSON.stringify(adminData));
-    }
-  }, [userData, adminData]);
-
   return (
-    <AuthContext.Provider
-      value={[userData, setUserData, adminData, setAdminData]}
-    >
-      {children}
-    </AuthContext.Provider>
+    <div>
+      <AuthContext.Provider
+        value={[userData, setUserData, adminData, setAdminData]}
+      >
+        {children}
+      </AuthContext.Provider>
+    </div>
   );
 };
 

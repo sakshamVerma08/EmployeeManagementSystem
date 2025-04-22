@@ -1,46 +1,36 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ActiveTasks from "./ActiveTasks";
 import NewTasks from "./NewTasks";
 import CompleteTasks from "./CompleteTasks";
 import FailedTasks from "./FailedTasks";
 
-const TaskList = ({ data }) => {
+const TaskList = ({ data, employeeData }) => {
   return (
-    <div
-      id="tasklist"
-      className=" w-full py-5  overflow-x-auto flex gap-5 flex-nowrap items-center justify-start h-[55%]  mt-10"
-    >
-      {data.tasks.map((element, index) => {
-        if (element.active) {
-          return (
-            <div key={index} className="tasklist-children">
-              <ActiveTasks data={element} />
-            </div>
-          );
-        }
-        if (element.newTask) {
-          return (
-            <div key={index} className="tasklist-children">
-              <NewTasks key={index} data={element} employeeData={data} />
-            </div>
-          );
-        }
-
-        /*if (element.completed) {
-          return <CompleteTasks key={index} data={element} />;
-        }
-          */
-
-        if (element.failed) {
-          return (
-            <div key={index} className="tasklist-children">
-              <FailedTasks key={index} data={element} />
-            </div>
-          );
-        }
-      })}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {data.tasks.map((task) => (
+        <div key={task.id} className="min-w-0">
+          {task.newTask && (
+            <NewTasks data={task} employeeData={employeeData} />
+          )}
+          {task.active && (
+            <ActiveTasks data={task} employeeData={employeeData} />
+          )}
+          {task.completed && (
+            <CompleteTasks data={task} employeeData={employeeData} />
+          )}
+          {task.failed && (
+            <FailedTasks data={task} employeeData={employeeData} />
+          )}
+        </div>
+      ))}
     </div>
   );
+};
+
+TaskList.propTypes = {
+  data: PropTypes.object.isRequired,
+  employeeData: PropTypes.object.isRequired
 };
 
 export default TaskList;

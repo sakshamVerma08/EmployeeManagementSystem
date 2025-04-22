@@ -4,6 +4,12 @@ import Header from "../others/Header";
 import TaskTracker from "../others/TaskTracker";
 import TaskList from "../Tasks/TaskList";
 
+/*
+
+New Task ---> becomes Active Task ---> becomes either Completed task or Failed Task
+
+*/
+
 const EmployeeDashboard = ({ data, changeUser }) => {
   return (
     <div className="min-h-screen w-full bg-[#1C1C1C] p-4 sm:p-6 md:p-8 lg:p-10">
@@ -12,7 +18,7 @@ const EmployeeDashboard = ({ data, changeUser }) => {
 
         <div className="mt-6 space-y-6">
           <TaskTracker data={data} />
-          <TaskList data={data} />
+          <TaskList data={data} employeeData={data} />
         </div>
       </div>
     </div>

@@ -1,8 +1,59 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { AuthContext } from "../../context/AuthProvider";
 
-const ActiveTasks = ({ data }) => {
+const ActiveTasks = ({ data, employeeData }) => {
+  const [userData, setUserData] = useContext(AuthContext);
+
+  const completeTask = () => {
+    // Create a deep copy of the data to avoid mutation
+    const updatedUserData = userData.map((emp) => {
+      if (emp.id === employeeData.id) {
+        // Filter out the completed task from the tasks array
+        const updatedTasks = emp.tasks.filter((task) => task.id !== data.id);
+
+        return {
+          ...emp,
+          tasks: updatedTasks,
+          taskCounts: {
+            ...emp.taskCounts,
+            active: emp.taskCounts.active - 1,
+            complete: emp.taskCounts.complete + 1,
+          },
+        };
+      }
+      return emp;
+    });
+
+    // Update the context state
+    setUserData(updatedUserData);
+  };
+
+  const failTask = () => {
+    // Create a deep copy of the data to avoid mutation
+    const updatedUserData = userData.map((emp) => {
+      if (emp.id === employeeData.id) {
+        // Filter out the failed task from the tasks array
+        const updatedTasks = emp.tasks.filter((task) => task.id !== data.id);
+
+        return {
+          ...emp,
+          tasks: updatedTasks,
+          taskCounts: {
+            ...emp.taskCounts,
+            active: emp.taskCounts.active - 1,
+            failed: emp.taskCounts.failed + 1,
+          },
+        };
+      }
+      return emp;
+    });
+
+    // Update the context state
+    setUserData(updatedUserData);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 w-full">
       <div className="space-y-3 sm:space-y-4">
@@ -25,13 +76,19 @@ const ActiveTasks = ({ data }) => {
         </div>
 
         <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
-          <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base transition-colors">
+          <button
+            onClick={completeTask}
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base transition-colors"
+          >
             <FaCheck className="text-sm sm:text-base" />
             Complete
           </button>
-          <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base transition-colors">
+          <button
+            onClick={failTask}
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base transition-colors"
+          >
             <FaTimes className="text-sm sm:text-base" />
-            Failed
+            Reject
           </button>
         </div>
       </div>
@@ -41,6 +98,7 @@ const ActiveTasks = ({ data }) => {
 
 ActiveTasks.propTypes = {
   data: PropTypes.object.isRequired,
+  employeeData: PropTypes.object.isRequired,
 };
 
 export default ActiveTasks;

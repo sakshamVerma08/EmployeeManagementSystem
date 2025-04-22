@@ -11,55 +11,34 @@ import { Routes, Route, Navigate, useNavigate } from "react-router";
 // import Welcome from "./components/Dashboard/Welcome";
 
 const App = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [userData, setUserData, adminData, setAdminData] =
-    useContext(AuthContext);
-
-  console.log("user data = ", userData);
-
-  /* useEffect(() => {
-    const [userData, setUserData, adminData, setAdminData] =
-      useContext(AuthContext);
-  }, [user]);*/
-
-  // This 'loggedInUserData' state is used to store the state of data of the currently logged in User from the fix arrya of Employees.
+  const [userData, setUserData, adminData, setAdminData] = useContext(AuthContext);
   const [loggedInUserData, setloggedInUserData] = useState(null);
-
-  // Alert component states. For type of alert, message displayed inside alert, visibility of alert component.
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    // Check for logged-in user on initial load
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const { role, data } = JSON.parse(loggedInUser);
+      setUser(role);
+      setloggedInUserData(data);
+      navigate(role === "admin" ? "/admin" : "/employee");
+    }
+  }, []);
 
-  // This function toggles the visibility of alert.
   const showAlert = () => {
     setAlertVisible(!alertVisible);
-
     setTimeout(() => {
       setAlertVisible(false);
     }, 2000);
   };
 
-  useEffect(() => {
-    // Sets the Data from time to time in the Local storage. Uses the "setLocalStorage" function, defined in localStorage.jsx.
-    setLocalStorage();
-  }, []);
-
-  useEffect(() => {
-    const newUser = localStorage.getItem("loggedInUser");
-    if (newUser) {
-      const parsedUser = JSON.parse(newUser);
-      setUser(parsedUser.role);
-      setloggedInUserData(parsedUser.data);
-    }
-  }, [userData]);
-
   const handleLogin = (email, password) => {
-    // First check admin credentials
-    const admin = adminData?.find(
-      (e) => e.email === email && e.password === password
-    );
+    const admin = adminData?.find((e) => e.email === email && e.password === password);
 
     if (admin) {
       setUser("admin");
@@ -71,8 +50,7 @@ const App = () => {
       navigate("/admin");
       return true;
     }
-
-    // Then check employee credentials
+    
     if (userData) {
       const employee = userData.find(
         (e) => e.email === email && e.password === password
@@ -89,7 +67,6 @@ const App = () => {
         return true;
       }
     }
-
     return false;
   };
 

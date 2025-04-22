@@ -10,48 +10,68 @@ const ActiveTasks = ({ data, employeeData }) => {
     // Create a deep copy of the data to avoid mutation
     const updatedUserData = userData.map((emp) => {
       if (emp.id === employeeData.id) {
-        // Filter out the completed task from the tasks array
-        const updatedTasks = emp.tasks.filter((task) => task.id !== data.id);
+        // Update the task status instead of removing it
+        const updatedTasks = emp.tasks.map((task) => {
+          if (task.id === data.id) {
+            return {
+              ...task,
+              active: false,
+              completed: true,
+            };
+          }
+          return task;
+        });
 
         return {
           ...emp,
           tasks: updatedTasks,
           taskCounts: {
             ...emp.taskCounts,
+            completed: emp.taskCounts.completed + 1,
             active: emp.taskCounts.active - 1,
-            complete: emp.taskCounts.complete + 1,
           },
         };
       }
       return emp;
     });
 
-    // Update the context state
+    // Update the context state and localStorage
     setUserData(updatedUserData);
+    localStorage.setItem("employees", JSON.stringify(updatedUserData));
   };
 
   const failTask = () => {
     // Create a deep copy of the data to avoid mutation
     const updatedUserData = userData.map((emp) => {
       if (emp.id === employeeData.id) {
-        // Filter out the failed task from the tasks array
-        const updatedTasks = emp.tasks.filter((task) => task.id !== data.id);
+        // Update the task status instead of removing it
+        const updatedTasks = emp.tasks.map((task) => {
+          if (task.id === data.id) {
+            return {
+              ...task,
+              active: false,
+              failed: true,
+            };
+          }
+          return task;
+        });
 
         return {
           ...emp,
           tasks: updatedTasks,
           taskCounts: {
             ...emp.taskCounts,
-            active: emp.taskCounts.active - 1,
             failed: emp.taskCounts.failed + 1,
+            active: emp.taskCounts.active - 1,
           },
         };
       }
       return emp;
     });
 
-    // Update the context state
+    // Update the context state and localStorage
     setUserData(updatedUserData);
+    localStorage.setItem("employees", JSON.stringify(updatedUserData));
   };
 
   return (

@@ -10,9 +10,7 @@ const TaskList = ({ data, employeeData }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {data.tasks.map((task) => (
         <div key={task.id} className="min-w-0">
-          {task.newTask && (
-            <NewTasks data={task} employeeData={employeeData} />
-          )}
+          {task.newTask && <NewTasks data={task} employeeData={employeeData} />}
           {task.active && (
             <ActiveTasks data={task} employeeData={employeeData} />
           )}
@@ -30,7 +28,7 @@ const TaskList = ({ data, employeeData }) => {
 
 TaskList.propTypes = {
   data: PropTypes.object.isRequired,
-  employeeData: PropTypes.object.isRequired
+  employeeData: PropTypes.object.isRequired,
 };
 
 export default TaskList;

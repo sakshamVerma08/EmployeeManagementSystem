@@ -18,7 +18,7 @@ const Login = ({ handleLogin }) => {
 
     setEmail("");
     setPassword("");
-
+    console.log("Login Form submitted!");
     const loginSuccess = handleLogin(email, password);
 
     if (!loginSuccess) {

@@ -47,7 +47,7 @@ const Signup = ({ setUser }) => {
     if (role === "employee") {
       const updatedUserData = [...(userData || []), newUser];
       setUserData(updatedUserData);
-      localStorage.setItem("employees", JSON.stringify(updatedUserData));
+      // localStorage.setItem("employees", JSON.stringify(updatedUserData));
 
       // Set user state and redirect
       setUser("employee");
@@ -59,7 +59,7 @@ const Signup = ({ setUser }) => {
     } else {
       const updatedAdminData = [...(adminData || []), newUser];
       setAdminData(updatedAdminData);
-      localStorage.setItem("admin", JSON.stringify(updatedAdminData));
+      // localStorage.setItem("admin", JSON.stringify(updatedAdminData));
 
       // Set user state and redirect
       setUser("admin");

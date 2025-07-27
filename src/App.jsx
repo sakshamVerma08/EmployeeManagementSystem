@@ -15,7 +15,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData, adminData, setAdminData] =
     useContext(AuthContext);
-  const [loggedInUserData, setloggedInUserData] = useState(null);
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [alertType, setAlertType] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
@@ -26,7 +26,7 @@ const App = () => {
     if (loggedInUser) {
       const { role, data } = JSON.parse(loggedInUser);
       setUser(role);
-      setloggedInUserData(data);
+      setLoggedInUserData(data);
       navigate(role === "admin" ? "/admin" : "/employee");
     }
   }, []);
@@ -39,38 +39,33 @@ const App = () => {
   };
 
   const handleLogin = (email, password) => {
+    console.log("handle Login was Called !");
     const admin = adminData?.find(
-      (e) => e.email === email && e.password === password
+      (e) => e.email == email && e.password == password
     );
 
-    if (admin) {
-      setUser("admin");
-      setloggedInUserData(admin);
-      localStorage.setItem(
-        "loggedInUser",
-        JSON.stringify({ role: "admin", data: admin })
-      );
-      navigate("/admin");
-      return true;
+    const employee =
+      !admin &&
+      userData?.find((e) => e.email === email && e.password === password);
+
+    console.log("Admin Search Result = ", admin);
+    console.log("Employee Search Result = ", employee);
+
+    const role = admin ? "admin" : employee ? "employee" : null;
+    const match = admin || employee;
+
+    if (!role) {
+      return false;
     }
 
-    if (userData) {
-      const employee = userData.find(
-        (e) => e.email === email && e.password === password
-      );
+    // Remove the previous logged-in user data from localStorage
+    localStorage.removeItem("loggedInUser");
 
-      if (employee) {
-        setUser("employee");
-        setloggedInUserData(employee);
-        localStorage.setItem(
-          "loggedInUser",
-          JSON.stringify({ role: "employee", data: employee })
-        );
-        navigate("/employee");
-        return true;
-      }
-    }
-    return false;
+    localStorage.setItem("loggedInUser", JSON.stringify({ role, data: match }));
+
+    setUser(role);
+    setLoggedInUserData(match);
+    navigate(`/${role}`);
   };
 
   // ************************************
